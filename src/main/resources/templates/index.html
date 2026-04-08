@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${ownerName} + ' | ' + ${ownerTitle}">Portfolio</title>
+    <meta name="description" th:content="${ownerTagline}"/>
+    <meta name="author" th:content="${ownerName}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/animations.css}"/>
+</head>
+<body>
+
+<nav id="navbar" class="navbar">
+    <div class="nav-container">
+        <a href="#home" class="nav-logo">
+            <span class="logo-bracket">&lt;</span>
+            <span class="logo-text" th:text="${ownerName}">Name</span>
+            <span class="logo-bracket">/&gt;</span>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li th:each="item : ${navItems}">
+                <a class="nav-link"
+                   th:href="'#' + ${item.toLowerCase()}"
+                   th:text="${item}">Link</a>
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+</nav>
+
+<section id="home" class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-content">
+        <p class="hero-greeting">Hello, I&rsquo;m</p>
+        <h1 class="hero-name" th:text="${ownerName}">Name</h1>
+        <h2 class="hero-title" th:text="${ownerTitle}">Title</h2>
+        <p class="hero-tagline" th:text="${ownerTagline}">Tagline</p>
+        <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary" th:text="${heroPrimary}">View My Work</a>
+            <a th:href="@{/cv/cv_ramaloko_m_latest.pdf}" target="_blank" rel="noopener" class="btn btn-outline" th:text="${heroSecondary}">Download CV</a>
+        </div>
+        <div class="hero-social">
+            <a th:href="${ownerGithub}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a th:href="${ownerLinkedin}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a th:href="'mailto:' + ${ownerEmail}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <a href="#about" aria-label="Scroll down">
+            <div class="scroll-indicator">
+                <div class="scroll-dot"></div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="about-grid reveal">
+            <div class="about-image">
+                <div class="about-image-frame">
+                    <img th:src="@{/images/profile-images/profile-main.jpeg}" alt="Profile Avatar" class="about-avatar-img" />
+                </div>
+                <div class="about-image-decoration"></div>
+            </div>
+            <div class="about-content">
+                <p class="about-text" th:text="${bioOne}">Bio 1</p>
+                <p class="about-text" th:text="${bioTwo}">Bio 2</p>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${yearsExperience} + '+'">3+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${projectsCompleted} + '+'">15+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${technologiesUsed} + '+'">25+</span>
+                        <span class="stat-label">Technologies Used</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title reveal">Technical Skills</h2>
+        <div class="skills-grid reveal">
+            <div class="skill-category-card" th:each="category : ${skillCategories}">
+                <h3 class="skill-category-title" th:text="${category}">Category</h3>
+                <div class="skill-list">
+                    <div class="skill-item" th:each="skill : ${skills}" th:if="${skill.category() == category}">
+                        <div class="skill-info">
+                            <i th:class="${skill.iconClass()}"></i>
+                            <span th:text="${skill.name()}">Skill</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" th:data-progress="${skill.proficiencyPercent()}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="section">
+    <div class="container">
+        <h2 class="section-title reveal">Featured Projects</h2>
+        <div class="project-filters reveal">
+            <button class="filter-btn active" th:each="cat : ${projectCategories}"
+                    th:text="${cat}"
+                    th:data-filter="${cat.toLowerCase().replace(' / ', '-').replace(' ', '-')}"
+                    th:classappend="${cat == 'All'} ? ' active' : ''">Filter</button>
+        </div>
+        <div class="projects-grid reveal">
+            <div class="project-card"
+                 th:each="project : ${projects}"
+                 th:data-category="${project.category().toLowerCase().replace(' / ', '-').replace(' ', '-')}">
+                <div class="project-image">
+                    <div class="project-placeholder">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-overlay">
+                        <a th:href="${project.githubUrl()}" target="_blank" rel="noopener" class="project-link" aria-label="View source">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a th:if="${!project.liveUrl().isEmpty()}" th:href="${project.liveUrl()}" target="_blank" rel="noopener" class="project-link" aria-label="View live">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category-badge" th:text="${project.category()}">Category</div>
+                    <h3 class="project-name" th:text="${project.name()}">Project</h3>
+                    <p class="project-description" th:text="${project.description()}">Description</p>
+                    <div class="project-tech">
+                        <span class="tech-tag" th:each="tech : ${project.techStack()}" th:text="${tech}">Tech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title reveal">Experience &amp; Education</h2>
+        <div class="timeline reveal">
+            <div class="timeline-item" th:each="exp,iter : ${experiences}">
+                <div class="timeline-marker">
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-content">
+                    <span class="timeline-period" th:text="${exp.period()}">Period</span>
+                    <h3 class="timeline-title" th:text="${exp.title()}">Title</h3>
+                    <h4 class="timeline-company" th:text="${exp.company()}">Company</h4>
+                    <p class="timeline-description" th:text="${exp.description()}">Description</p>
+                    <div class="timeline-tech">
+                        <span class="tech-tag" th:each="tech : ${exp.technologies()}" th:text="${tech}">Tech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="section">
+    <div class="container">
+        <div class="gallery-achievements-wrapper reveal">
+            <div class="gallery-column">
+                <h2 class="subsection-title">Photo Gallery</h2>
+                <div class="photo-grid">
+                    <div th:each="img : ${gallery}" class="photo-item gallery-trigger">
+                        <img th:src="@{${img}}" alt="Gallery Photo" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+            <div class="achievements-column">
+                <h2 class="subsection-title">Personal Achievements</h2>
+                <div class="achievements-list">
+                    <a th:each="achieve : ${achievements}" th:href="${achieve.filePath()}" target="_blank" rel="noopener" class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h3 class="achievement-title" th:text="${achieve.title()}">Title</h3>
+                            <span class="achievement-link-text">View Certificate <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title reveal">Get In Touch</h2>
+        <div class="contact-grid reveal">
+            <div class="contact-info">
+                <p class="contact-text">
+                    I&rsquo;m always open to discussing new projects, creative ideas, or opportunities to be part of something great.
+                </p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a th:href="'mailto:' + ${ownerEmail}" th:text="${ownerEmail}">email@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a th:href="'tel:' + ${ownerPhone}" th:text="${ownerPhone}">+123 456 7890</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span th:text="${ownerLocation}">Location</span>
+                    </div>
+                </div>
+                <div class="contact-social">
+                    <a th:href="${ownerGithub}" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a th:href="${ownerLinkedin}" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a th:href="'mailto:' + ${ownerEmail}" class="social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm" th:action="'mailto:' + ${ownerEmail}" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <input type="text" id="contactName" name="name" placeholder="Your Name" required="required"/>
+                    <label for="contactName">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="contactEmail" name="email" placeholder="Your Email" required="required"/>
+                    <label for="contactEmail">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="contactSubject" name="subject" placeholder="Subject" required="required"/>
+                    <label for="contactSubject">Subject</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="contactMessage" name="message" placeholder="Your Message" rows="5" required="required"></textarea>
+                    <label for="contactMessage">Your Message</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <a href="#home" class="footer-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text" th:text="${ownerName}">Name</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+            <p class="footer-text" th:text="${footerText}">Footer</p>
+            <div class="footer-links">
+                <a th:each="item : ${navItems}"
+                   th:href="'#' + ${item.toLowerCase()}"
+                   th:text="${item}">Link</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="lightbox" id="galleryLightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img class="lightbox-content" id="lightboxImg">
+</div>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

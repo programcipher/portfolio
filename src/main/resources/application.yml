@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: portfolio
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+
+server:
+  port: 8080
