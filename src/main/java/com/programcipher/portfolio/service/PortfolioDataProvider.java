@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.programcipher.portfolio.config.PortfolioConstants;
+import com.programcipher.portfolio.model.Achievement;
 import com.programcipher.portfolio.model.Experience;
 import com.programcipher.portfolio.model.Project;
 import com.programcipher.portfolio.model.Skill;
-import com.programcipher.portfolio.model.Achievement;
 
 @Service
 public class PortfolioDataProvider {
@@ -127,7 +127,8 @@ public class PortfolioDataProvider {
 
                                 new Skill("Spring Boot", PortfolioConstants.SKILL_CATEGORY_FRAMEWORKS, 68,
                                                 "fas fa-leaf"),
-                                new Skill("Django REST", PortfolioConstants.SKILL_CATEGORY_FRAMEWORKS, 75, "fab fa-python"),
+                                new Skill("Django REST", PortfolioConstants.SKILL_CATEGORY_FRAMEWORKS, 75,
+                                                "fab fa-python"),
                                 new Skill("React / React Native", PortfolioConstants.SKILL_CATEGORY_FRAMEWORKS, 85,
                                                 "fab fa-react"),
                                 new Skill("Next.js", PortfolioConstants.SKILL_CATEGORY_FRAMEWORKS, 55, "fas fa-server"),
@@ -176,6 +177,7 @@ public class PortfolioDataProvider {
                                 PortfolioConstants.CATEGORY_AI,
                                 PortfolioConstants.CATEGORY_IOT);
         }
+
         public List<Experience> getAllExperience() {
                 return List.of(
                                 new Experience(
@@ -183,7 +185,8 @@ public class PortfolioDataProvider {
                                                 "Tshwane University of Technology (TUT)",
                                                 "Jan 2026 \u2013 Dec 2026",
                                                 "Currently pursuing Advanced Diploma in Computer Science.",
-                                                List.of("Advanced Software Engineering", "System Architecture", "Cloud Computing")),
+                                                List.of("Advanced Software Engineering", "System Architecture",
+                                                                "Cloud Computing")),
                                 new Experience(
                                                 "Software Engineer - Work-Integrated Learning",
                                                 "Informatics Community Engagement Program (ICEP) | Remote",
@@ -195,19 +198,23 @@ public class PortfolioDataProvider {
                                                 "Tshwane University of Technology (TUT)",
                                                 "Feb 2023 \u2013 Dec 2025",
                                                 "Qualified Dec 2025. Achieved distinctions in Operating Systems (91%), Object-Oriented Programming (87%), and Advanced OOP (84%).",
-                                                List.of("Java", "C++", "SQL", "HTML/CSS", "Kotlin"))
-                );
+                                                List.of("Java", "C++", "SQL", "HTML/CSS", "Kotlin")));
         }
 
         public List<Achievement> getAllAchievements() {
                 return List.of(
-                                new Achievement("AWS Academy Cloud Foundations", "#"),
-                                new Achievement("Zero Day CTF Certificate", "/cv/personal-archivements/Mpho Ramaloko Zero Day CTF Cert.pdf"),
-                                new Achievement("World Wide CTF Certificate", "/cv/personal-archivements/WWCTF Cert M Ramaloko.pdf"),
-                                new Achievement("Excellence Award (TUT 2024)", "/cv/personal-archivements/excellence-award-tut-2024.pdf"),
-                                new Achievement("Hackathon Certificate (TUT 2023)", "/cv/personal-archivements/hackathon-cert-tut-2023.pdf"),
-                                new Achievement("Hackathon Certificate (UL 2025)", "/cv/personal-archivements/hackathon-cert-ul-2025.pdf")
-                );
+                                new Achievement("AWS Academy Cloud Foundations",
+                                                "https://www.credly.com/go/7K5FxMdttUOPa2WP06g56g"),
+                                new Achievement("Zero Day CTF Certificate",
+                                                "/cv/personal-archivements/Mpho Ramaloko Zero Day CTF Cert.pdf"),
+                                new Achievement("World Wide CTF Certificate",
+                                                "/cv/personal-archivements/WWCTF Cert M Ramaloko.pdf"),
+                                new Achievement("Excellence Award (TUT 2024)",
+                                                "/cv/personal-archivements/excellence-award-tut-2024.pdf"),
+                                new Achievement("Hackathon Certificate (TUT 2023)",
+                                                "/cv/personal-archivements/hackathon-cert-tut-2023.pdf"),
+                                new Achievement("Hackathon Certificate (UL 2025)",
+                                                "/cv/personal-archivements/hackathon-cert-ul-2025.pdf"));
         }
 
         public List<String> getGalleryImages() {
@@ -217,7 +224,6 @@ public class PortfolioDataProvider {
                                 "/images/ul-varsity_hackathon/IMG_5024.JPG",
                                 "/images/workspace-setup/IMG_20241119_205301_583.jpg",
                                 "/images/workspace-setup/IMG_20241119_205411_109.jpg",
-                                "/images/profile-images/profile2.jpg"
-                );
+                                "/images/profile-images/profile2.jpg");
         }
 }
