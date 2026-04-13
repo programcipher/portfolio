@@ -174,3 +174,23 @@ function initGalleryLightbox() {
         }
     });
 }
+
+function sendEmail(e) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.getAttribute('data-email');
+    var name = document.getElementById('contactName').value;
+    var userEmail = document.getElementById('contactEmail').value;
+    var subject = document.getElementById('contactSubject').value;
+    var message = document.getElementById('contactMessage').value;
+    
+    var body = `Hi!
+
+${message}
+
+Thanks,
+${name}
+${userEmail}`;
+    
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}

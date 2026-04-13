@@ -186,7 +186,8 @@ public class PortfolioDataProvider {
                                                 "Jan 2026 \u2013 Dec 2026",
                                                 "Currently pursuing Advanced Diploma in Computer Science.",
                                                 List.of("Advanced Software Engineering", "System Architecture",
-                                                                "Cloud Computing")),
+                                                                "Cloud Computing",
+                                                                "Data Structures and Algorithms in Java")),
                                 new Experience(
                                                 "Software Engineer - Work-Integrated Learning",
                                                 "Informatics Community Engagement Program (ICEP) | Remote",
@@ -194,10 +195,10 @@ public class PortfolioDataProvider {
                                                 "Developed production-grade React.js and Node.js web applications, adhering strictly to Agile and Scrum methodologies. Engineered secure REST APIs utilizing JSON Web Token (JWT) authentication and Role-Based Access Control (RBAC).",
                                                 List.of("React.js", "Node.js", "Express.js", "Agile", "Scrum")),
                                 new Experience(
-                                                "Diploma in Computer Science",
+                                                "Diploma in Computer Science (NQF Level 6)",
                                                 "Tshwane University of Technology (TUT)",
                                                 "Feb 2023 \u2013 Dec 2025",
-                                                "Qualified Dec 2025. Achieved distinctions in Operating Systems (91%), Object-Oriented Programming (87%), and Advanced OOP (84%).",
+                                                "Qualified Dec 2025.",
                                                 List.of("Java", "C++", "SQL", "HTML/CSS", "Kotlin")));
         }
 

@@ -12,15 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/animations.css}"/>
+    <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon.svg}">
 </head>
 <body>
 
 <nav id="navbar" class="navbar">
     <div class="nav-container">
-        <a href="#home" class="nav-logo">
-            <span class="logo-bracket">&lt;</span>
-            <span class="logo-text" th:text="${ownerName}">Name</span>
-            <span class="logo-bracket">/&gt;</span>
+        <a href="#home" class="nav-logo" style="display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-globe" style="color: var(--accent-primary); font-size: 1.2rem;"></i>
+            <span class="logo-text" th:text="${ownerName} + ' | Software Engineer'">Name</span>
         </a>
         <ul class="nav-menu" id="navMenu">
             <li th:each="item : ${navItems}">
@@ -70,7 +70,7 @@
         <h2 class="section-title reveal">About Me</h2>
         <div class="about-grid reveal">
             <div class="about-image">
-                <div class="about-image-frame">
+                <div class="about-image-frame gallery-trigger" style="cursor: pointer;">
                     <img th:src="@{/images/profile-images/profile-main.jpeg}" alt="Profile Avatar" class="about-avatar-img" />
                 </div>
                 <div class="about-image-decoration"></div>
@@ -243,7 +243,7 @@
                     </a>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm" th:action="'mailto:' + ${ownerEmail}" method="post" enctype="text/plain">
+            <form class="contact-form" id="contactForm" th:data-email="${ownerEmail}" onsubmit="sendEmail(event)">
                 <div class="form-group">
                     <input type="text" id="contactName" name="name" placeholder="Your Name" required="required"/>
                     <label for="contactName">Your Name</label>
